@@ -9,6 +9,7 @@ import (
 
 	"github.com/ileacristian/go-bookings/pkg/config"
 	"github.com/ileacristian/go-bookings/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 var app *config.AppConfig
@@ -17,12 +18,12 @@ func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
-func AddDefaultData(templateData *models.TemplateData) *models.TemplateData {
-
+func AddDefaultData(templateData *models.TemplateData, r *http.Request) *models.TemplateData {
+	templateData.CSRFToken = nosurf.Token(r)
 	return templateData
 }
 
-func RenderTemplate(w http.ResponseWriter, tempateName string, tempateData *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tempateName string, tempateData *models.TemplateData) {
 	var cache map[string]*template.Template
 	if app.UseCache {
 		cache = app.TemplateCache
@@ -35,7 +36,7 @@ func RenderTemplate(w http.ResponseWriter, tempateName string, tempateData *mode
 		log.Fatal("could not find template in cache")
 	}
 
-	tempateData = AddDefaultData(tempateData)
+	tempateData = AddDefaultData(tempateData, r)
 
 	tempBuffer := new(bytes.Buffer)
 	_ = template.Execute(tempBuffer, tempateData)
