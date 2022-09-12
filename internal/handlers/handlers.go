@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ileacristian/go-bookings/pkg/config"
-	"github.com/ileacristian/go-bookings/pkg/models"
-	"github.com/ileacristian/go-bookings/pkg/render"
+	"github.com/ileacristian/go-bookings/internal/config"
+	"github.com/ileacristian/go-bookings/internal/models"
+	"github.com/ileacristian/go-bookings/internal/render"
 )
 
 var Repo *Repository

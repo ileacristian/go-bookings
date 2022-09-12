@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/ileacristian/go-bookings/pkg/config"
-	"github.com/ileacristian/go-bookings/pkg/models"
+	"github.com/ileacristian/go-bookings/internal/config"
+	"github.com/ileacristian/go-bookings/internal/models"
 	"github.com/justinas/nosurf"
 )
 

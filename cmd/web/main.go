@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/ileacristian/go-bookings/pkg/config"
-	"github.com/ileacristian/go-bookings/pkg/handlers"
-	"github.com/ileacristian/go-bookings/pkg/render"
+	"github.com/ileacristian/go-bookings/internal/config"
+	"github.com/ileacristian/go-bookings/internal/handlers"
+	"github.com/ileacristian/go-bookings/internal/render"
 )
 
 const portNumber = ":8080"
