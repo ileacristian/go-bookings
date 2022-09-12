@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,6 +10,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/ileacristian/go-bookings/internal/config"
 	"github.com/ileacristian/go-bookings/internal/handlers"
+	"github.com/ileacristian/go-bookings/internal/models"
 	"github.com/ileacristian/go-bookings/internal/render"
 )
 
@@ -23,6 +25,8 @@ func main() {
 	session.Cookie.Persist = true
 	session.Cookie.SameSite = http.SameSiteLaxMode
 	session.Cookie.Secure = app.InProduction
+
+	gob.Register(models.Reservation{})
 
 	app.UseCache = false
 	app.InProduction = false
