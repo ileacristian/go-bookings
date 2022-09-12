@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/ileacristian/go-bookings/pkg/config"
@@ -58,6 +60,28 @@ func (m *Repository) PostAvailabilityHandler(w http.ResponseWriter, r *http.Requ
 	end := r.Form.Get("end")
 
 	w.Write([]byte(fmt.Sprintf("Start date is %s and end date is %s", start, end)))
+}
+
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+func (m *Repository) JSONAvailabilityHandler(w http.ResponseWriter, r *http.Request) {
+	resp := jsonResponse{
+		OK:      true,
+		Message: "Available!",
+	}
+
+	jsonBytes, err := json.MarshalIndent(resp, "", "     ")
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println(string(jsonBytes))
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonBytes)
 }
 
 func (m *Repository) ContactHandler(w http.ResponseWriter, r *http.Request) {
